@@ -129,7 +129,7 @@ class PageSpeed{
     }
 
     protected function improveWebp(&$content = ''){
-        if ($this->improveLazyLoad) {
+        if ($this->improveWebp) {
             if ((strpos( $_SERVER['HTTP_USER_AGENT'], 'Safari') === false || strpos( $_SERVER['HTTP_USER_AGENT'], 'Chrome') !== false) && strpos($_SERVER['HTTP_USER_AGENT'], 'Trident') === false && function_exists('imagewebp')){
                 preg_match_all('/<img[^>]+>/i',$content, $img);
                 if($img[0]){
@@ -158,6 +158,18 @@ class PageSpeed{
                             }
                             else{
                                 $content = str_replace($attr[1][0],$path, $content);
+                            }
+                        }
+                    }
+                }
+                preg_match_all('/background:url\("([^"]+)/i',$content, $img);
+                if($img[1]){
+                    $img[1] = array_unique($img[1]);
+                    foreach($img[1] as $i => $v){
+                        if(strpos($v,'.png') !== false || strpos($v,'.jpg') !== false || strpos($v,'.jpeg') !== false){
+                            $path = str_replace(['.png','.jpeg','.jpg'],'.webp',$v);
+                            if(file_exists($_SERVER['DOCUMENT_ROOT'].$path)){
+                                $content = str_replace($v,$path, $content);
                             }
                         }
                     }
