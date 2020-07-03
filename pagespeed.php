@@ -138,15 +138,14 @@ class PageSpeed{
                         if($attr[1][0] && strpos($attr[1][0],'.webp') === false){
                             $path = str_replace(['.png','.jpeg','.jpg'],'.webp',$attr[1][0]);
                             if(!file_exists($_SERVER['DOCUMENT_ROOT'].$path)){
-                                if (strpos($attr[1][0], '.png')) {
-                                    /*$newImg = imagecreatefrompng($_SERVER['DOCUMENT_ROOT'] . $attr[1][0]);
+                            /*    if (strpos($attr[1][0], '.png')) {
+                                    $newImg = imagecreatefrompng($_SERVER['DOCUMENT_ROOT'] . $attr[1][0]);
                                     imagealphablending($newImg, false);
                                     imagesavealpha($newImg, true);
-                                    $newImgPath = str_replace('.png', '.webp', $attr[1][0]);*/
+                                    $newImgPath = str_replace('.png', '.webp', $attr[1][0]);
                                 } elseif (strpos($attr[1][0], '.jpg') !== false || strpos($attr[1][0], '.jpeg') !== false) {
-/*
                                     $newImg = imagecreatefromjpeg($_SERVER['DOCUMENT_ROOT'] . $attr[1][0]);
-                                    $newImgPath = str_replace(array('.jpg', '.jpeg'), '.webp', $attr[1][0]);*/
+                                    $newImgPath = str_replace(array('.jpg', '.jpeg'), '.webp', $attr[1][0]);
                                 }
                                 if ($newImg) {
                                     if (!file_exists($_SERVER['DOCUMENT_ROOT'] . $newImgPath)) {
@@ -154,10 +153,10 @@ class PageSpeed{
                                     }
                                     imagedestroy($newImg);
                                 }
-
+*/
                             }
                             else{
-                                $content = str_replace($attr[1][0],$path, $content);
+                                $content = str_replace('src="'.$attr[1][0].'"','src="'.$path.'"', $content);
                             }
                         }
                     }
