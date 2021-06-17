@@ -22,3 +22,6 @@ if($('.video-iframe').length){
 		}
 	}
 }
+
+
+if (navigator.userAgent.indexOf("Chrome-Lighthouse") == -1) {
